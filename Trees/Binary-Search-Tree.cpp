@@ -52,11 +52,18 @@ private:
         }
     }
 
+    t getHeightHelper(Node *temp) {
+        if (temp == nullptr) return -1; // Found empty subtree
+
+        int l = getHeightHelper(temp->left);
+        int r = getHeightHelper(temp->right);
+        return 1 + max(l, r);
+    }
+
 public:
     void add(t value) {
         if (root == NULL) {
             root = new Node(value);
-
         } else {
             //We pass root in argument because temp will point on root
             addHelper(root, value);
@@ -71,18 +78,27 @@ public:
         return getMinHelper(root);
     }
 
-};
+    int getHeight() {
+        if (root == nullptr) {
+            return -1;
+        } else {
+            return getHeightHelper(root);
+        }
+    }
 
+};
 
 int main() {
     BST<int> bst;
-    bst.add(1);
-    bst.add(2);
-    bst.add(1231);
-    bst.add(10);
     bst.add(15);
+    bst.add(6);
     bst.add(20);
+    bst.add(25);
+    bst.add(9);
+    bst.add(3);
+    bst.add(8);
 
-    cout << bst.getMax() << " " << bst.getMin();
+
+    cout << bst.getHeight();
 
 }
