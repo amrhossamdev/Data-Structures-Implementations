@@ -4,7 +4,6 @@ using namespace std;
 
 template<class t>
 
-//Created by @amrhossamdev
 class BST {
 private:
     struct Node {
@@ -32,15 +31,29 @@ private:
             if (temp->right == nullptr) {
                 temp->right = new Node(value);
             } else {
-                addHelper(std::ref(temp), value);
+                addHelper(temp->right, value);
             }
+        }
+    }
+
+    t getMaxHelper(Node *temp) {
+        if (temp->right == nullptr) {
+            return temp->data;
+        } else {
+            return getMaxHelper(temp->right);
+        }
+    }
+
+    t getMinHelper(Node *temp) {
+        if (temp->left == nullptr) {
+            return temp->data;
+        } else {
+            return getMaxHelper(temp->left);
         }
     }
 
 public:
     void add(t value) {
-
-
         if (root == NULL) {
             root = new Node(value);
 
@@ -49,14 +62,27 @@ public:
             addHelper(root, value);
         }
     }
-    
+
+    t getMax() {
+        return getMaxHelper(root);
+    }
+
+    t getMin() {
+        return getMinHelper(root);
+    }
+
 };
 
 
 int main() {
     BST<int> bst;
-    bst.add(15);
+    bst.add(1);
+    bst.add(2);
+    bst.add(1231);
     bst.add(10);
+    bst.add(15);
     bst.add(20);
+
+    cout << bst.getMax() << " " << bst.getMin();
 
 }
