@@ -59,6 +59,17 @@ private:
         return 1 + max(l, r);
     }
 
+    void preOrder(Node *temp) {
+        if (temp == nullptr) return;
+        // cout in first preorder
+        cout << temp->data << " ";
+        preOrder(temp->left);
+        // cout in midlle inorder
+        preOrder(temp->right);
+        // cout in end postorder
+
+    }
+
 public:
     void add(t value) {
         if (root == NULL) {
@@ -93,11 +104,16 @@ public:
             Node *current = q.front();
             q.pop();
             cout << current->data << " ";
-            if (current->left != nullptr)q.push(current->left);
-            if (current->right != nullptr)q.push(current->right);
+            if (current->left != nullptr) q.push(current->left);
+            if (current->right != nullptr) q.push(current->right);
         }
         cout << endl;
     }
+
+    void displayPlayOrder() {
+        preOrder(root);
+    }
+    // preorder
 
 };
 
@@ -111,6 +127,6 @@ int main() {
     bst.add(3);
     bst.add(8);
 
-    bst.displayLevelOrder();
+    bst.displayPlayOrder();
 
 }
