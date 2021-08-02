@@ -19,7 +19,6 @@ private:
 
     Node *root = nullptr;
 
-
     void addHelper(Node *temp, t value) {
         if (value <= temp->data) {
             if (temp->left == nullptr) {
@@ -86,6 +85,20 @@ public:
         }
     }
 
+    void displayLevelOrder() {
+        if (root == nullptr) return;
+        queue<Node *> q;
+        q.push(root);
+        while (!q.empty()) {
+            Node *current = q.front();
+            q.pop();
+            cout << current->data << " ";
+            if (current->left != nullptr)q.push(current->left);
+            if (current->right != nullptr)q.push(current->right);
+        }
+        cout << endl;
+    }
+
 };
 
 int main() {
@@ -98,7 +111,6 @@ int main() {
     bst.add(3);
     bst.add(8);
 
-
-    cout << bst.getHeight();
+    bst.displayLevelOrder();
 
 }
